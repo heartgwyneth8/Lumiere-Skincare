@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Skincare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <!-- Left: Brand -->
+            <div class="nav-brand">
+                <div class="brand-name">Lumière</div>
+            </div>
+            
+            <!-- Middle: Navigation Links -->
+            <div class="nav-center">
+                <a href="#about">Home</a>
+                <a href="#products">Shop</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <!-- Right: Search, Cart, Profile -->
+            <div class="nav-right">
+                <button class="nav-icon" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="nav-icon" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="nav-icon" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Search Bar -->
+        <div class="search-bar" id="searchBar">
+            <input type="text" placeholder="Search products..." id="searchInput">
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+        <div class="hero-content">
+            <h1>Your Skincare Journey</h1>
+            <p>Discover products tailored to your unique skin needs</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2>All Products</h2>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <select id="skinTypeFilter">
+                    <option value="">All Skin Types</option>
+                    <option value="dry">Dry</option>
+                    <option value="oily">Oily</option>
+                    <option value="combination">Combination</option>
+                    <option value="sensitive">Sensitive</option>
+                </select>
+                
+                <select id="concernFilter">
+                    <option value="">All Concerns</option>
+                    <option value="acne">Acne</option>
+                    <option value="aging">Anti-Aging</option>
+                    <option value="hydration">Hydration</option>
+                    <option value="brightening">Brightening</option>
+                </select>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Lumière</h3>
+                    <p>Your personalized skincare journey starts here. Discover products tailored to your unique skin needs and embrace your natural beauty.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">Skincare Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Shipping Information</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#" id="trackOrdersBtn">Track Your Order</a></li>
+                    </ul>
+                </div>
+                
+            <section id="contact" class="contact-section">
+                <div class="container">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>lumière@skincare.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+63 917 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Makati City, Metro Manila, Philippines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lumière Skincare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content product-detail">
+            <!-- Product details will be loaded here -->
+        </div>
+    </div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content login-modal">
+        <span class="close">&times;</span>
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+        </div>
+        
+        <form class="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" name="remember">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" id="forgotPasswordBtn" class="forgot-password">Forgot password?</a>
+            </div>
+            
+            <button type="button" id="loginSubmitBtn" class="btn-primary login-btn">
+                <span class="btn-text">Sign In</span>
+                <span class="btn-spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+        </form>
+        
+        <div class="login-footer">
+            <p>Don't have an account? <a href="#" id="showSignupBtn">Sign up</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Create an Account</h2>
+        <form id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="signupFirstName">First Name</label>
+                    <input type="text" id="signupFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupLastName">Last Name</label>
+                    <input type="text" id="signupLastName" name="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <label for="agreeTerms">I agree to the Terms and Conditions</label>
+            </div>
+            <button type="submit" id="signupSubmitBtn" class="btn-primary">
+                <span class="btn-text">Create Account</span>
+                <span class="btn-spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+        </form>
+        <div class="auth-links">
+            <a href="#" id="showLoginBtn">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Reset Password</h2>
+        <form id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="forgotPasswordEmail">Email Address</label>
+                <input type="email" id="forgotPasswordEmail" name="email" required>
+            </div>
+            <button type="submit" id="sendResetLinkBtn" class="btn-primary">
+                <span class="btn-text">Send Reset Link</span>
+                <span class="btn-spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+        </form>
+        <div class="auth-links">
+            <a href="#" id="backToLoginBtn">Back to Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-total">
+            <h3>Total: ₱<span id="cartTotal">0.00</span></h3>
+            <button class="btn-primary" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>My Profile</h2>
+        <div class="profile-content">
+            <div class="profile-header">
+                <h3 id="profileUserName">User Name</h3>
+                <p id="profileUserEmail">user@email.com</p>
+            </div>
+            <div class="profile-details">
+                <div class="detail-item">
+                    <strong>Email:</strong>
+                    <span id="profileUserEmailDetail">user@email.com</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Phone:</strong>
+                    <span id="profileUserPhone">+1 (555) 123-4567</span>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button id="editProfileBtn" class="btn-secondary">Edit Profile</button>
+                <button id="logoutBtn" class="btn-primary">Logout</button>
+            </div>
+            <div class="order-history">
+                <h3>Order History</h3>
+                <div id="orderHistoryList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

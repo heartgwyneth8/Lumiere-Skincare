@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Skincare - Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Simple admin access - no redirects
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Lumière Admin Panel loaded');
+        });
+
+        function adminLogout() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+    <button class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <h2>Lumière Admin</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <ul class="nav-links">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" data-section="dashboard">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="product-management">
+                                <i class="fas fa-shopping-bag"></i>
+                                Manage Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="order-management">
+                                <i class="fas fa-receipt"></i>
+                                Manage Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="user-management">
+                                <i class="fas fa-users"></i>
+                                Manage Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="analytics">
+                                <i class="fas fa-chart-line"></i>
+                                Analytics
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar" id="current-user-avatar">A</div>
+                    <div class="user-info">
+                        <div class="user-name" id="current-user-name">Admin</div>
+                        <div class="user-role">Administrator</div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="adminLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="content-header">
+                <div class="header-left">
+                    <h1 id="section-title">Dashboard</h1>
+                    <p id="section-description">Welcome to Lumière Admin Panel</p>
+                </div>
+                <div class="header-actions" id="header-actions">
+                    <!-- Dynamic buttons will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard">
+                <div class="overview-grid">
+                    <div class="overview-card large">
+                        <h3>BUSINESS OVERVIEW</h3>
+                        <div class="today-stats">
+                            <div class="today-stat">
+                                <span class="today-value" id="total-orders">0</span>
+                                <span class="today-label">TOTAL ORDERS</span>
+                            </div>
+                            <div class="today-stat">
+                                <span class="today-value" id="pending-orders">0</span>
+                                <span class="today-label">PENDING</span>
+                            </div>
+                            <div class="today-stat">
+                                <span class="today-value" id="revenue-today">₱0</span>
+                                <span class="today-label">REVENUE TODAY</span>
+                            </div>
+                            <div class="today-stat">
+                                <span class="today-value" id="total-products">0</span>
+                                <span class="today-label">PRODUCTS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-actions-grid">
+                            <div class="quick-action-card" data-section="product-management">
+                                <i class="fas fa-plus-circle"></i>
+                                <h3>Add Product</h3>
+                                <p>Create new skincare product</p>
+                            </div>
+                            <div class="quick-action-card" data-section="order-management">
+                                <i class="fas fa-eye"></i>
+                                <h3>View Orders</h3>
+                                <p>Check recent orders</p>
+                            </div>
+                            <div class="quick-action-card" data-section="analytics">
+                                <i class="fas fa-chart-bar"></i>
+                                <h3>Sales Report</h3>
+                                <p>View sales analytics</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <h3>Recent Activity</h3>
+                        <div class="recent-activity" id="recent-activity">
+                            <!-- Recent activity will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Management Section -->
+            <div class="content-section" id="product-management">
+                <div class="section-header">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="product-search" placeholder="Search products...">
+                        </div>
+                        <button class="btn btn-primary" id="add-product-btn">
+                            <i class="fas fa-plus"></i>
+                            Add New Product
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="all">All Products</button>
+                    <button class="category-tab" data-category="cleanser">Cleansers</button>
+                    <button class="category-tab" data-category="moisturizer">Moisturizers</button>
+                    <button class="category-tab" data-category="serum">Serums</button>
+                    <button class="category-tab" data-category="sunscreen">Sunscreen</button>
+                    <button class="category-tab" data-category="treatment">Treatments</button>
+                </div>
+                
+                <div class="products-container" id="products-list">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Order Management Section -->
+            <div class="content-section" id="order-management">
+                <div class="section-header">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="order-search" placeholder="Search orders...">
+                        </div>
+                        <select class="filter-select" id="order-status-filter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="orders-container" id="orders-list">
+                    <!-- Orders will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- User Management Section -->
+            <div class="content-section" id="user-management">
+                <div class="section-header">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="user-search" placeholder="Search customers...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="users-container" id="users-list">
+                    <!-- Customers will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="content-section" id="analytics">
+                <div class="section-header">
+                    <div class="section-actions">
+                        <select class="filter-select" id="analytics-period">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="analytics-grid">
+                    <!-- Revenue Summary -->
+                    <div class="overview-card large">
+                        <h3>REVENUE SUMMARY</h3>
+                        <div class="revenue-stats">
+                            <div class="revenue-stat">
+                                <span class="revenue-value" id="today-revenue">₱0</span>
+                                <span class="revenue-label">TODAY</span>
+                            </div>
+                            <div class="revenue-stat">
+                                <span class="revenue-value" id="weekly-revenue">₱0</span>
+                                <span class="revenue-label">THIS WEEK</span>
+                            </div>
+                            <div class="revenue-stat">
+                                <span class="revenue-value" id="monthly-revenue">₱0</span>
+                                <span class="revenue-label">THIS MONTH</span>
+                            </div>
+                            <div class="revenue-stat">
+                                <span class="revenue-value" id="total-revenue">₱0</span>
+                                <span class="revenue-label">TOTAL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sales Chart -->
+                    <div class="overview-card large">
+                        <h3>SALES TREND</h3>
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Performing Products -->
+                    <div class="overview-card">
+                        <h3>TOP PRODUCTS</h3>
+                        <div class="top-items-container" id="top-products-list">
+                            <!-- Top products will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Order Metrics -->
+                    <div class="overview-card">
+                        <h3>ORDER METRICS</h3>
+                        <div class="performance-stats">
+                            <div class="performance-stat">
+                                <span class="performance-value" id="today-orders">0</span>
+                                <span class="performance-label">TODAY'S ORDERS</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="performance-value" id="avg-order-value">₱0</span>
+                                <span class="performance-label">AVG ORDER VALUE</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="performance-value" id="completion-rate">0%</span>
+                                <span class="performance-label">COMPLETION RATE</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="performance-value" id="total-orders-count">0</span>
+                                <span class="performance-label">TOTAL ORDERS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Product</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name *</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-price">Price (₱) *</label>
+                    <input type="number" id="product-price" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-type">Product Type *</label>
+                    <select id="product-type" required>
+                        <option value="">Select Type</option>
+                        <option value="cleanser">Cleanser</option>
+                        <option value="moisturizer">Moisturizer</option>
+                        <option value="serum">Serum</option>
+                        <option value="sunscreen">Sunscreen</option>
+                        <option value="treatment">Treatment</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-skin-types">Skin Types (comma separated)</label>
+                    <input type="text" id="product-skin-types" placeholder="dry, oily, combination, sensitive">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-concerns">Skin Concerns (comma separated)</label>
+                    <input type="text" id="product-concerns" placeholder="acne, aging, hydration, brightening">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" rows="3" placeholder="Product description..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-sizes">Sizes</label>
+                    <input type="text" id="product-sizes" placeholder="125ml, 50ml">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image">Image URL</label>
+                    <input type="url" id="product-image" placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-tags">Tags (comma separated)</label>
+                    <input type="text" id="product-tags" placeholder="Gentle, Hydrating, Vegan">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-add-product">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="edit-product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Product</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="edit-product-form">
+                <input type="hidden" id="edit-product-id">
+                
+                <div class="form-group">
+                    <label for="edit-product-name">Product Name *</label>
+                    <input type="text" id="edit-product-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-price">Price (₱) *</label>
+                    <input type="number" id="edit-product-price" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-type">Product Type *</label>
+                    <select id="edit-product-type" required>
+                        <option value="cleanser">Cleanser</option>
+                        <option value="moisturizer">Moisturizer</option>
+                        <option value="serum">Serum</option>
+                        <option value="sunscreen">Sunscreen</option>
+                        <option value="treatment">Treatment</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-skin-types">Skin Types</label>
+                    <input type="text" id="edit-product-skin-types">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-concerns">Skin Concerns</label>
+                    <input type="text" id="edit-product-concerns">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-description">Description</label>
+                    <textarea id="edit-product-description" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-sizes">Sizes</label>
+                    <input type="text" id="edit-product-sizes">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-image">Image URL</label>
+                    <input type="url" id="edit-product-image">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-product-tags">Tags</label>
+                    <input type="text" id="edit-product-tags">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-edit-product">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Order Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="order-details-content" id="order-details-content">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
