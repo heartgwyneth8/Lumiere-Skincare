@@ -47,5 +47,3 @@ A responsive skincare e-commerce website with admin panel.
 
 ---
 *Note: Uses browser localStorage. Clear browser data will reset.*
-
-That's more appropriate for a simple project! The first version was more suitable for a complex, production-ready application with multiple contributors.
